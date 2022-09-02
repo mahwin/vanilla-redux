@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { actionCreators } from "../store";
+import { add } from "../store";
 import ToDo from "../component/ToDo";
 
 function Home({ toDos, addTodo }) {
+  console.log(toDos);
   const [text, setText] = useState("");
   const onChange = (e) => {
     setText(e.target.value);
@@ -21,7 +22,7 @@ function Home({ toDos, addTodo }) {
         <button>ADD</button>
       </form>
       <ul>
-        {toDos.map((todo) => (
+        {toDos?.map((todo) => (
           <ToDo key={todo.id} {...todo} />
         ))}
       </ul>
@@ -39,7 +40,7 @@ function mapStateToProps(state) {
 // redux의 값을 변경하는 dispatch를 props로 전달하겠다.
 function mapDispatchToProps(dispatch) {
   return {
-    addTodo: (text) => dispatch(actionCreators.addTodo(text)),
+    addTodo: (text) => dispatch(add(text)),
   };
 }
 
